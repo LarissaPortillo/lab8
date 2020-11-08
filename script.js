@@ -97,16 +97,28 @@ svg.selectAll('text')
             .attr("y",d=>yScale(d.gas))
             .attr('font-size', 7.5)
            // .attr('text-anchor', 'start')
-            .each(position)
+           
             .text(d => d.year)
-            
+            .each(position)
             .call(halo);
   
 
+svg.select(".x-axis").select(".domain").remove();
 
-axisGroup.select(".domain").remove();
-
+svg.select(".y-axis").select(".domain").remove();
   
+ svg.select(".y-axis").selectAll(".tick line")
+    .clone()
+    .attr("x2", width)
+    .attr("stroke-opacity", 0.1); // make it transparent ;
+  
+
+svg.select(".x-axis").selectAll(".tick line")
+    .clone()
+    .attr("y2", -height)
+    .attr("stroke-opacity", 0.1); // make it transparent ;
+  
+
 
 
   
