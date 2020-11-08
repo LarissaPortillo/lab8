@@ -119,7 +119,25 @@ svg.select(".x-axis").selectAll(".tick line")
     .attr("stroke-opacity", 0.1); // make it transparent ;
   
 
-
+svg.call(g=>
+	g.append("text")
+    .attr("x", width-2*margin.right)
+    .attr("y",height-margin.bottom-5)
+	  .text("Miles per person per year")
+    .style("text-anchor", "middle")
+    .attr("font-size",11.5)
+	  .call(halo) // optional halo effect
+  );
+  
+svg.call(g=>
+	g.append("text")
+    .attr("x", 3*margin.right)
+    .attr("y",margin.top)
+	  .text("Cost per gallon")
+    .style("text-anchor", "middle")
+    .attr("font-size",11.5)
+	  .call(halo) // optional halo effect
+  );
 
   
 });
