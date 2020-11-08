@@ -140,4 +140,14 @@ svg.call(g=>
   );
 
   
+  const line = d3.line()
+  .x(d=>xScale(d.miles))
+  .y(d=>yScale(d.gas));
+  
+  svg.append("path")
+    .datum(sorted)
+    .attr("fill", "none")
+    .attr("stroke", "black")
+    .attr("d", line);
+  
 });
