@@ -25,12 +25,31 @@ d3.csv("https://cdn.glitch.com/a3e24eba-b378-48e5-a881-609f19dd60d6%2Fdriving.cs
   svg.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`);
+  
+  svg.selectAll("circle")
+  .data(sorted)
+  .enter()
+  .append("circle")
+  .attr("cx", d=>xScale(d=>d.miles))
+  .attr("cy",d=> yScale(d=>d.gas))
+  .attr("r",4)
+  .attr("fill","steelblue");
+  
+  
+  
+
 
   const xAxis = d3.axisBottom()
         .scale(xScale);
 
-        const yAxis = d3.axisLeft()
+  const yAxis = d3.axisLeft()
         .scale(yScale);
+  
+  svg.select(".x-axis")
+        .call(xAxis);
+  
+  svg.select(".y-axis")
+        .call(yAxis);
 
   
 });
