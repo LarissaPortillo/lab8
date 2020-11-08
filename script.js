@@ -55,6 +55,18 @@ d3.csv("https://cdn.glitch.com/a3e24eba-b378-48e5-a881-609f19dd60d6%2Fdriving.cs
   .attr("r",4)
   .attr("fill","steelblue");
   
+  function halo(text) {
+  text
+    .select(function() {
+      return this.parentNode.insertBefore(this.cloneNode(true), this);
+    })
+    .attr("fill", "none")
+    .attr("stroke", "white")
+    .attr("stroke-width", 4)
+    .attr("stroke-linejoin", "round");
+}
+  
+
   
   
 
