@@ -55,6 +55,38 @@ d3.csv("https://cdn.glitch.com/a3e24eba-b378-48e5-a881-609f19dd60d6%2Fdriving.cs
   .attr("r",4)
   .attr("fill","steelblue");
   
+  function halo(text) {
+  text
+    .select(function() {
+      return this.parentNode.insertBefore(this.cloneNode(true), this);
+    })
+    .attr("fill", "none")
+    .attr("stroke", "white")
+    .attr("stroke-width", 4)
+    .attr("stroke-linejoin", "round");
+};
+
+function position(d) {
+  const t = d3.select(this);
+  switch (d.side) {
+    case "top":
+      t.attr("text-anchor", "middle").attr("dy", "-0.7em");
+      break;
+    case "right":
+      t.attr("dx", "0.5em")
+        .attr("dy", "0.32em")
+        .attr("text-anchor", "start");
+      break;
+    case "bottom":
+      t.attr("text-anchor", "middle").attr("dy", "1.4em");
+      break;
+    case "left":
+      t.attr("dx", "-0.5em")
+        .attr("dy", "0.32em")
+        .attr("text-anchor", "end");
+      break;
+  }
+};
 
   
 svg.selectAll('text')
@@ -63,10 +95,12 @@ svg.selectAll('text')
             .append('text')
             .attr("x",d=>xScale(d.miles))
             .attr("y",d=>yScale(d.gas))
-            .text(d => d.name)
+            .text(d => d.year)
+            .attr('font-size', 10)
+            .attr('text-anchor', 'start')
             //.each(position)
-            //.call(halo)
-  ;
+            .call(halo);
+  
 
 
 
