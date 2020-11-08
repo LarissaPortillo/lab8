@@ -64,29 +64,30 @@ d3.csv("https://cdn.glitch.com/a3e24eba-b378-48e5-a881-609f19dd60d6%2Fdriving.cs
     .attr("stroke", "white")
     .attr("stroke-width", 4)
     .attr("stroke-linejoin", "round");
-}
-  
-svg.selectAll('text')
-            .data(sorted)
-            .enter()
-            .append('text')
-            .attr('x',(d)=>xScale(d.miles) )
-            .attr('y',(d)=>yScale(d.gas) )
-            .text((d)=>d.year)
-            //.attr('dx',10)
-           // .attr('dy', 3)
+};
 
-            .attr('font-size', 10)
-            .each(d=> {
-                const t = d3.select(this);
-                switch (d.side) {
-                  case "top": t.attr("text-anchor", "middle").attr("dy", "-0.7em"); break;
-                  case "right": t.attr("dx", "0.5em").attr("dy", "0.32em").attr("text-anchor", "start"); break;
-                  case "bottom": t.attr("text-anchor", "middle").attr("dy", "1.4em"); break;
-                  case "left": t.attr("dx", "-0.5em").attr("dy", "0.32em").attr("text-anchor", "end"); break;
-                }
-              })
-            .call(halo);
+  const label= svg.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
+    .selectAll("g")
+    .data(data)
+    .join("g")
+      .attr("transform", d => `translate(${xScale(d.miles)},${yScale(d.gas)})`)
+      .attr("opacity", 0);
+  
+  
+label.append("text")
+      .text(d => d.name)
+      .each(function(d) {
+        const t = d3.select(this);
+        switch (d.side) {
+          case "top": t.attr("text-anchor", "middle").attr("dy", "-0.7em"); break;
+          case "right": t.attr("dx", "0.5em").attr("dy", "0.32em").attr("text-anchor", "start"); break;
+          case "bottom": t.attr("text-anchor", "middle").attr("dy", "1.4em"); break;
+          case "left": t.attr("dx", "-0.5em").attr("dy", "0.32em").attr("text-anchor", "end"); break;
+        }
+      })
+      .call(halo);
   
   
 
