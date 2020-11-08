@@ -4,8 +4,8 @@ d3.csv("https://cdn.glitch.com/a3e24eba-b378-48e5-a881-609f19dd60d6%2Fdriving.cs
   const sorted= data.sort((a,b)=>a.year-b.year);
   console.log(sorted);
   
-  const height = 500;
-  const width= 650;
+  const height = 350;
+  const width= 600;
   const margin = ({top: 20, right: 30, bottom: 30, left: 40});
   
   const svg = d3.select("body")
@@ -73,16 +73,16 @@ function position(d) {
       t.attr("text-anchor", "middle").attr("dy", "-0.7em");
       break;
     case "right":
-      t.attr("dx", "0.5em")
-        .attr("dy", "0.32em")
+      t.attr("dx", "0.4em")
+        .attr("dy", "0.30em")
         .attr("text-anchor", "start");
       break;
     case "bottom":
       t.attr("text-anchor", "middle").attr("dy", "1.4em");
       break;
     case "left":
-      t.attr("dx", "-0.5em")
-        .attr("dy", "0.32em")
+      t.attr("dx", "-0.1em")
+        .attr("dy", "0.30em")
         .attr("text-anchor", "end");
       break;
   }
@@ -95,10 +95,10 @@ svg.selectAll('text')
             .append('text')
             .attr("x",d=>xScale(d.miles))
             .attr("y",d=>yScale(d.gas))
-            .text(d => d.year)
-            .attr('font-size', 10)
+            .attr('font-size', 7.5)
             .attr('text-anchor', 'start')
-            //.each(position)
+            .text(d => d.year)
+            .each(position)
             .call(halo);
   
 
