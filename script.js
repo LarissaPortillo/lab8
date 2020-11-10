@@ -89,7 +89,7 @@ function position(d) {
   }
 };
 
-  
+
 svg.selectAll('text')
             .data(sorted)
             .enter()
@@ -102,6 +102,8 @@ svg.selectAll('text')
             .text(d => d.year)
             .each(position)
             .call(halo);
+
+  console.log("print",sorted);
   
 
 svg.select(".x-axis").select(".domain").remove();
