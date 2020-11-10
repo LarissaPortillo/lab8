@@ -45,16 +45,19 @@ d3.csv("https://cdn.glitch.com/a3e24eba-b378-48e5-a881-609f19dd60d6%2Fdriving.cs
   svg.select(".y-axis")
         .call(yAxis);
   
-  
-  
-  svg.selectAll("circle")
+const datagroup=svg.append("g")
+  .selectAll("circle")
   .data(sorted)
   .enter()
-  .append("circle")
+  .append("g");
+  
+datagroup.append("circle")
   .attr("cx", d=>xScale(d.miles))
   .attr("cy",d=> yScale(d.gas))
   .attr("r",4)
   .attr("fill","steelblue");
+  
+
   
   function halo(text) {
   text
@@ -89,22 +92,18 @@ function position(d) {
   }
 };
 
-
-svg.selectAll('text')
-            .data(sorted)
-            .enter()
-            .append('text')
+  
+  datagroup.append('text')
             .attr("x",d=>xScale(d.miles))
             .attr("y",d=>yScale(d.gas))
             .attr('font-size', 7.5)
            // .attr('text-anchor', 'start')
            
-            .text(d => d.year)
+            .text(d => {return d.year;})
             .each(position)
             .call(halo);
 
-  console.log("print",sorted);
-  
+ 
 
 svg.select(".x-axis").select(".domain").remove();
 
